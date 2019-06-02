@@ -1,27 +1,27 @@
 package com.stefan;
 
-public class SimpleBattleship {
-    int[] locationCells;
-    int numberOfHits;
+import java.util.ArrayList;
 
-    public void setLocationCells(int[] locs) {
-        locationCells = locs;
+public class SimpleBattleship {
+    private ArrayList<String> locationCells = new ArrayList<>();
+
+    public void setLocationCells(int[] locations) {
+        for (int location : locations) {
+            locationCells.add(String.valueOf(location));
+        }
     }
 
-    public String checkYourself(String userGuess) {
-        int guess = Integer.parseInt(userGuess);
+    public String checkYourself(String userInput) {
         String result = "miss";
-        for (int cell : locationCells) {
-            if (guess == cell) {
-                result = "hit";
-                numberOfHits++;
-                break;
+        if (locationCells.contains(userInput)) {
+            result = "hit";
+            locationCells.remove(userInput);
+            if (locationCells.isEmpty()) {
+                result = "kill";
             }
-        }
-        if (numberOfHits == locationCells.length) {
-            result = "kill";
         }
         System.out.println(result);
         return result;
     }
+
 }
