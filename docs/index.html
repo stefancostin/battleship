@@ -17,8 +17,54 @@
             margin: 0 0 5px;
         }
         .battleship span {
+            position: relative;
             margin-left: 15px;
             margin-right: 15px;
+            -webkit-transition: all 0.8s ease-out;
+            -moz-transition: all 0.8s ease-out;
+            -o-transition: all 0.8s ease-out;
+            transition: all 0.8s ease-out;
+        }
+        .battleship span i {
+            position: absolute;
+            z-index: 2;
+            top: 0;
+            left: 0;
+            color: #ffffff;
+            opacity: 0;
+            -webkit-transition: all 0.8s ease-out;
+            -moz-transition: all 0.8s ease-out;
+            -o-transition: all 0.8s ease-out;
+            transition: all 0.8s ease-out;
+        }
+        .battleship span i::before {
+            content: '-';
+            z-index: 0;
+            position: absolute;
+            top: 1px;
+            left: 1px;
+            color: rebeccapurple;
+            opacity: 0.25;
+            -webkit-transition: all 0.8s ease-out;
+            -moz-transition: all 0.8s ease-out;
+            -o-transition: all 0.8s ease-out;
+            transition: all 0.8s ease-out;
+        }
+        .battleship span i::after {
+            content: '-';
+            z-index: 1;
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            color: lightcoral;
+            opacity: 0.85;
+            -webkit-transition: all 0.8s ease-out;
+            -moz-transition: all 0.8s ease-out;
+            -o-transition: all 0.8s ease-out;
+            transition: all 0.8s ease-out;
+        }
+        .battleship:hover span i {
+            opacity: 1;
         }
         .battleship .link {
             text-align: center;
@@ -50,76 +96,76 @@
 <body>
     <section class="battleship">
         <p row-1>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
         </p>
         <p row-2>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
         </p>
         <p row-2>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
         </p>
         <p row-3>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
         </p>
         <p row-4>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
         </p>
         <p row-5>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
         </p>
         <p row-6>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
         </p>
         <p row-7>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
-            <span>-</span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
+            <span>-<i>-</i></span>
         </p>
         <p class="link">
             <a class="accent" href="https://github.com/stefancostin/battleship">battleship</a>
