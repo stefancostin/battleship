@@ -1,10 +1,12 @@
-package com.stefan;
+package io.github.stefancostin.battleship.tests;
 
-public class SimpleBattleshipTestDrive {
+import io.github.stefancostin.battleship.core.Battleship;
 
-    public static void testHitCase() {
+public class BattleshipTestDrive {
+
+    public static void testBattleshipHitCase(Battleship battleship) {
         // Instantiation
-        SimpleBattleship battleship = new SimpleBattleship();
+//        Battleship battleship = new Battleship();
 
         // Set battleship location
         int[] locations = {2, 3, 4};
@@ -23,5 +25,5 @@ public class SimpleBattleshipTestDrive {
         // Print
         System.out.println(testResult);
     }
-
+    
 }

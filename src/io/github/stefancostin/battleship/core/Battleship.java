@@ -1,8 +1,8 @@
-package com.stefan;
+package io.github.stefancostin.battleship.core;
 
 import java.util.ArrayList;
 
-public class SimpleBattleship {
+public class Battleship {
     private ArrayList<String> locationCells = new ArrayList<>();
 
     public void setLocationCells(int[] locations) {
@@ -23,5 +23,4 @@ public class SimpleBattleship {
         System.out.println(result);
         return result;
     }
-
 }

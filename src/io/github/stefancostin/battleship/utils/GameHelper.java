@@ -1,9 +1,11 @@
-package com.stefan;
+package io.github.stefancostin.battleship.utils;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 
 public class GameHelper {
-
+	
     public String getUserInput(String prompt) {
         String inputLine = null;
         System.out.println(prompt);
@@ -16,5 +18,5 @@ public class GameHelper {
         }
         return inputLine;
     }
-
+    
 }

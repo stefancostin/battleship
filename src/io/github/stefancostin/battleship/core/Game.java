@@ -1,6 +1,9 @@
-package com.stefan;
+package io.github.stefancostin.battleship.core;
 
-public class SimpleBattleshipsGame {
+import io.github.stefancostin.battleship.tests.BattleshipTestDrive;
+import io.github.stefancostin.battleship.utils.GameHelper;
+
+public class Game {
 
     public static void main(String[] args) {
         boolean isAlive = true;
@@ -8,7 +11,7 @@ public class SimpleBattleshipsGame {
 
         int firstLocation  = (int) (Math.random() * 5);
         int[] locations = {firstLocation, ++firstLocation, ++firstLocation};
-        SimpleBattleship battleship = new SimpleBattleship();
+        Battleship battleship = new Battleship();
         battleship.setLocationCells(locations);
 
         GameHelper helper = new GameHelper();
@@ -25,7 +28,8 @@ public class SimpleBattleshipsGame {
     }
 
     private static void testDrive() {
-        SimpleBattleshipTestDrive testBattleship = new SimpleBattleshipTestDrive();
-        testBattleship.testHitCase();
+    	Battleship testBattleship = new Battleship();
+        BattleshipTestDrive.testBattleshipHitCase(testBattleship);
     }
+    
 }
