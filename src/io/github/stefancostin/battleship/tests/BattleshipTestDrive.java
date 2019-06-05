@@ -1,24 +1,28 @@
 package io.github.stefancostin.battleship.tests;
 
-import io.github.stefancostin.battleship.core.Battleship;
+import java.util.ArrayList;
+
+import io.github.stefancostin.battleship.game.Battleship;
+import io.github.stefancostin.battleship.utils.Turn;
 
 public class BattleshipTestDrive {
 
     public static void testBattleshipHitCase(Battleship battleship) {
-        // Instantiation
-//        Battleship battleship = new Battleship();
-
         // Set battleship location
-        int[] locations = {2, 3, 4};
+        ArrayList<String> locations = new ArrayList<>();
+        locations.add("A3");
+        locations.add("A4");
+        locations.add("A5");
+        
         battleship.setLocationCells(locations);
 
         // Get user guess
         String userGuess = "2";
 
         // Check result of checkYourself method
-        String result = battleship.checkYourself(userGuess);
+        Turn result = battleship.checkYourself(userGuess);
         String testResult = "failed";
-        if(result.equals("hit")) {
+        if(result == Turn.HIT) {
             testResult = "passed";
         }
 
