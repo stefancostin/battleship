@@ -54,7 +54,6 @@ public class Game {
     	for (Battleship battleship : battleshipList) {
     		result = battleship.checkYourself(userInput);
     		if (result == Turn.HIT) {
-    			System.out.println("hit");
     			break;
     		}
     		if (result == Turn.KILL) {
@@ -76,9 +75,9 @@ public class Game {
     
     
 
-//    private void testDrive() {
-//    	Battleship testBattleship = new Battleship();
-//        BattleshipTestDrive.testBattleshipHitCase(testBattleship);
-//    }
+    private void testDrive() {
+    	Battleship testBattleship = new Battleship("Test Battleship");
+        BattleshipTestDrive.testBattleshipHitCase(testBattleship);
+    }
     
 }

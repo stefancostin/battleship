@@ -26,7 +26,7 @@ public class Battleship {
         if (locationCells.contains(userInput)) {
             locationCells.remove(userInput);
             if (locationCells.isEmpty()) {
-            	System.out.println("Ouch! You have sunk " + this.getName());
+            	System.out.println("Ouch! You have sunk " + this.getName() + ".");
                 result = Turn.KILL;
             } else {
             	result = Turn.HIT;
