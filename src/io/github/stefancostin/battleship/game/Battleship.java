@@ -5,26 +5,26 @@ import java.util.ArrayList;
 import io.github.stefancostin.battleship.utils.Turn;
 
 public class Battleship {
-    private ArrayList<String> locationCells = new ArrayList<>();
+    private ArrayList<Integer> locationCells = new ArrayList<>();
     private String name;
     
     public Battleship(String name) {
     	this.name = name;
     }
     
-    public Battleship(String name, ArrayList<String> locs) {
+    public Battleship(String name, ArrayList<Integer> locs) {
     	this(name);
     	locationCells = locs;
     }
 
-    public void setLocationCells(ArrayList<String> locations) {
+    public void setLocationCells(ArrayList<Integer> locations) {
     	this.locationCells = locations;
     }
 
-    public Turn checkYourself(String userInput) {
+    public Turn checkYourself(int userInput) {
         Turn result = Turn.MISS;
         if (locationCells.contains(userInput)) {
-            locationCells.remove(userInput);
+            locationCells.remove(Integer.valueOf(userInput));
             if (locationCells.isEmpty()) {
             	System.out.println("Ouch! You have sunk " + this.getName() + ".");
                 result = Turn.KILL;

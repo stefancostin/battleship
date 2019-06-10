@@ -8,11 +8,11 @@ import io.github.stefancostin.battleship.utils.Turn;
 
 public class Game {
 	private int numOfGuesses;
-	private GameHelper helper;
+	private GameHelper utils;
 	private ArrayList<Battleship> battleshipList;
 	
 	public Game() {
-		this.helper = new GameHelper();
+		this.utils = new GameHelper();
 		this.battleshipList = new ArrayList<>();
 	}
 
@@ -35,14 +35,15 @@ public class Game {
     	System.out.println("Try to sink them all in the fewest number of guesses.");
     	
     	for (Battleship battleship : battleshipList) {
-    		ArrayList<String> newLocation = helper.placeBattleship(3);
+    		ArrayList<Integer> newLocation = utils.placeBattleship(3);
     		battleship.setLocationCells(newLocation);
     	}
     }
     
     private void startPlaying() {
     	do {
-    		String userInput = helper.getUserInput("Enter a guess: ");
+        	utils.renderMap();
+    		String userInput = utils.getUserInput("Enter a guess: ");
     		this.checkUserGuess(userInput);
     	} while(!battleshipList.isEmpty());
     	this.finishGame();
@@ -50,21 +51,11 @@ public class Game {
     
     private void checkUserGuess(String userInput) {
     	this.numOfGuesses++;
-    	Turn result = Turn.MISS;
-    	for (Battleship battleship : battleshipList) {
-    		result = battleship.checkYourself(userInput);
-    		if (result == Turn.HIT) {
-    			break;
-    		}
-    		if (result == Turn.KILL) {
-    			this.battleshipList.remove(battleship);
-    			break;
-    		}
-    	}
-    	System.out.println(result.toString().toLowerCase());
+    	utils.checkCell(userInput, battleshipList);
     }
     
     private void finishGame() {
+    	utils.renderMap();
     	System.out.println("All battleships have been sunk!");
     	if (this.numOfGuesses <= 18) {
     		System.out.println("It only took you " + this.numOfGuesses + " guesses.");

@@ -3,19 +3,18 @@ package io.github.stefancostin.battleship.utils;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.InputMismatchException;
+
+import io.github.stefancostin.battleship.game.Battleship;
+import io.github.stefancostin.battleship.game.Map;
+
 import java.io.IOException;
 
 public class GameHelper {
-	private static final String alphabet = "ABCDEFG";
-	private int gridLength;
-	private int gridSize;
-	private int[] grid;
-	private int shipCount;
+	private Map map;
 	
 	public GameHelper() {
-		this.gridLength = 7;
-		this.gridSize = (int) Math.pow(this.gridLength, 2);
-		this.grid = new int[this.gridSize];
+		this.map = new Map();
 	}
 	
     public String getUserInput(String prompt) {
@@ -31,8 +30,12 @@ public class GameHelper {
         return inputLine.toUpperCase();
     }
     
-    public ArrayList<String> placeBattleship(int shipSize) {
-    	ArrayList<String> alphaCells = new ArrayList<String>();
+    public ArrayList<Integer> placeBattleship(int shipSize) {
+    	ArrayList<Integer> alphaCells = new ArrayList<>();
+    	
+    	int[] grid = map.getGrid();
+    	int gridLength = map.getGridLength();
+    	int gridSize = map.getGridSize();
     	
     	String temp = null;
     	int[] coords = new int[shipSize];
@@ -40,10 +43,10 @@ public class GameHelper {
     	int attempts = 0;
     	int location = 0;
     	
-    	shipCount++;
+    	map.incrementShipCount();
     	int incr = 1;
-    	if (shipCount % 2 == 1) {
-    		incr = gridLength;
+    	if (map.getShipCount() % 2 == 1) {
+    		incr = map.getGridLength();
     	}
     	
     	while (!success && attempts++ < 200) {
@@ -68,23 +71,75 @@ public class GameHelper {
     			}
     		}
     	}
-    	
     	int x = 0;
-    	int row = 0;
-    	int column = 0;
-//    	System.out.print("\n");
     	while (x < shipSize) {
-    		grid[coords[x]] = 1;
-    		row = (int) (coords[x] / gridLength);
-    		column = coords[x] % gridLength;
-    		temp = String.valueOf(alphabet.charAt(column));
-    		
-    		alphaCells.add(temp.concat(Integer.toString(row)));
+    		alphaCells.add(coords[x]);
     		x++;
-    		System.out.print(" coord " + x + " = " + alphaCells.get(x - 1));
+    		System.out.println(" coord: " + coords[x -1]);
     	}
-    	System.out.println("\n");
     	return alphaCells;
+    }
+    
+    public void checkCell(String userInput, ArrayList<Battleship> battleshipList) {
+    	Turn result = Turn.MISS;
+    	try {    		
+    		int location = this.convertToCellLocation(userInput);  		
+    		map.setDisplayCell(location, ' ');
+    		for (Battleship battleship : battleshipList) {
+    			result = battleship.checkYourself(location);
+    			if (result == Turn.HIT) {
+    				map.setDisplayCell(location, '*');
+    				break;
+    			}
+    			if (result == Turn.KILL) {
+    				map.setDisplayCell(location, '*');
+    				battleshipList.remove(battleship);
+    				break;
+    			}
+    		}
+    	} catch(InputMismatchException e) {
+    		System.out.println(e.getMessage());
+    	} finally {    		
+    		System.out.println(result.toString().toLowerCase());
+    	}
+    	
+    }
+    
+    public void renderMap() {
+    	// First Row: 1 2 3 4 5 6
+    	System.out.print("\n" + "   ");
+    	for (int i = 0; i < map.getGridLength(); i++) {
+    		System.out.print(i + "  ");
+    	}
+    	System.out.print("\n");
+    	
+    	// Display Map
+    	for (int i = 0; i < map.getGridSize(); i++) {
+    		// Display Cols: A B C D E F G
+    		if (i % map.getGridLength() == 0) {
+    			System.out.print("\n");
+    			System.out.print(Map.alphabet.charAt(i / map.getGridLength()) + "  ");
+    		}
+    		// Display cells: - - - - - - -
+    		System.out.print(map.renderDisplayCell(i) + "  ");
+    	}
+    	System.out.print("\n" + "\n");
+    }
+    
+    private int convertToCellLocation(String userInput) throws InputMismatchException {
+    	if (userInput.length() == 2) {
+    		char letter = userInput.charAt(0);
+    		char digit = userInput.charAt(1);
+    		
+    		if ((Character.isLetter(letter) && Map.alphabet.contains(String.valueOf(letter))) &&
+    			(Character.isDigit(digit) && (Integer.parseInt(String.valueOf(digit)) < map.getGridLength()))) {
+    			return Map.alphabet.indexOf(letter) * map.getGridLength() + Integer.parseInt(String.valueOf(digit));
+    		} else {
+    			throw new InputMismatchException();
+    		}
+    	} else {
+    		throw new InputMismatchException();
+    	}
     }
     
 }
