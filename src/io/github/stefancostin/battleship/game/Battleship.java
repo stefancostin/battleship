@@ -21,10 +21,10 @@ public class Battleship {
     	this.locationCells = locations;
     }
 
-    public Turn checkYourself(int userInput) {
+    public Turn checkYourself(int location) {
         Turn result = Turn.MISS;
-        if (locationCells.contains(userInput)) {
-            locationCells.remove(Integer.valueOf(userInput));
+        if (locationCells.contains(location)) {
+            locationCells.remove(Integer.valueOf(location));
             if (locationCells.isEmpty()) {
             	System.out.println("Ouch! You have sunk " + this.getName() + ".");
                 result = Turn.KILL;

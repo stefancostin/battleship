@@ -9,18 +9,20 @@ public class BattleshipTestDrive {
 
     public static void testBattleshipHitCase(Battleship battleship) {
         // Set battleship location
-        ArrayList<String> locations = new ArrayList<>();
-        locations.add("A3");
-        locations.add("A4");
-        locations.add("A5");
+        ArrayList<Integer> locations = new ArrayList<>();
+        locations.add(0);
+        locations.add(1);
+        locations.add(2);
         
         battleship.setLocationCells(locations);
 
-        // Get user guess
-        String userGuess = "2";
+        // Get user guess and pass it to 'checkCell' method in the GameHelper class.
+        // The method converts the user input into the corresponding integer that
+        // is returned here as the 'locationFromUserGuess' variable.
+        int locationFromUserGuess = 1;
 
         // Check result of checkYourself method
-        Turn result = battleship.checkYourself(userGuess);
+        Turn result = battleship.checkYourself(locationFromUserGuess);
         String testResult = "failed";
         if(result == Turn.HIT) {
             testResult = "passed";
