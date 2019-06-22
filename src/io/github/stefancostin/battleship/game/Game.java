@@ -19,17 +19,15 @@ public class Game {
 
     public static void main(String[] args) {
     	Game game = new Game();
-    	game.displayMenu(game);
-//    	game.setupGame();
-//    	game.startPlaying();
+    	game.selectMenuOption(game);
     }
     
-    private void displayMenu(Game game) {
+    private void selectMenuOption(Game game) {
     	final int maxPasses = 20;
     	int pass = 0;
     	Menu menu = new Menu();
     	do {
-    		menu.showOptions();
+    		menu.displayMenuOptions();
     		String selectedMenuOption = utils.getUserInput("Type option: ").toUpperCase();
 
     		MenuOption option = menu.checkSelection(selectedMenuOption);
