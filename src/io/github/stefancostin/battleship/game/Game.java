@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import io.github.stefancostin.battleship.tests.BattleshipTestDrive;
 import io.github.stefancostin.battleship.utils.GameHelper;
+import io.github.stefancostin.battleship.utils.MenuOption;
 import io.github.stefancostin.battleship.utils.Turn;
 
 public class Game {
@@ -18,8 +19,40 @@ public class Game {
 
     public static void main(String[] args) {
     	Game game = new Game();
-    	game.setupGame();
-    	game.startPlaying();
+    	game.displayMenu(game);
+//    	game.setupGame();
+//    	game.startPlaying();
+    }
+    
+    private void displayMenu(Game game) {
+    	final int maxPasses = 20;
+    	int pass = 0;
+    	Menu menu = new Menu();
+    	do {
+    		menu.showOptions();
+    		String selectedMenuOption = utils.getUserInput("Type option: ").toUpperCase();
+
+    		MenuOption option = menu.checkSelection(selectedMenuOption);
+    		if (option == null) continue;
+    		switch (option) {
+    			case SINGLEPLAYER:  game.setupGame();
+    	    						game.startPlaying();
+    	    						pass = maxPasses;
+    	    						break;
+    	    						
+    			case MULTIPLAYER:   game.setupGame();
+    								game.startPlaying();
+    								pass = maxPasses;
+    								break;
+    								
+    			case QUIT:			System.out.println("Game has ended.");
+    								pass = maxPasses;
+    								break;
+    								
+    			default: 			System.out.print("Please enter a valid option.\n");
+    		}  		
+    		pass++;
+    	} while(pass < maxPasses);
     }
     
     private void setupGame() {
