@@ -1,6 +1,8 @@
-package io.github.stefancostin.battleship.game;
+package io.github.stefancostin.battleship.game.modes;
 
 import java.util.ArrayList;
+
+import io.github.stefancostin.battleship.game.Battleship;
 
 public class SinglePlayer extends GameMode {
 	private int numOfGuesses;
