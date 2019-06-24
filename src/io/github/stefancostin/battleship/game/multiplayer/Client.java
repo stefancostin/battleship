@@ -3,11 +3,13 @@ package io.github.stefancostin.battleship.game.multiplayer;
 import java.io.IOException;
 import java.net.Socket;
 
+import io.github.stefancostin.battleship.utils.Constants;
+
 public class Client extends Player {
 
 	public void run() {
 		try {
-			socket = new Socket("localhost", 9086);
+			socket = new Socket("localhost", Constants.port);
 			System.out.println("Client started.");
 		} catch (IOException e) {
 			e.printStackTrace();
