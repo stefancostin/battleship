@@ -11,6 +11,5 @@ public abstract class GameMode {
 
 	public abstract void setupGame();
 	public abstract void startPlaying();
-	public abstract void checkUserGuess(String userInput);
 	public abstract void finishGame();
 }

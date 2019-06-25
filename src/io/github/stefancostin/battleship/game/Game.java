@@ -72,10 +72,12 @@ public class Game {
     	switch (role) {
     		case CLIENT:  	newGame = new MultiPlayer(new Client());
     						newGame.setupGame();
+    						newGame.startPlaying();
     						break;
     						
     		case SERVER:	newGame = new MultiPlayer(new Server());
     						newGame.setupGame();
+    						newGame.startPlaying();
     						break;
     						
     		default:		System.out.print("Please enter a valid multiplayer role.\n");
