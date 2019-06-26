@@ -11,7 +11,7 @@ import io.github.stefancostin.battleship.game.Map;
 import java.io.IOException;
 
 public class GameHelper {
-	private Map map;
+	protected Map map;
 	
 	public GameHelper() {
 		this.map = new Map();
@@ -126,44 +126,7 @@ public class GameHelper {
     	System.out.print("\n" + "\n");
     }
     
-    public void renderMultiplayerMap(Map oppMap) {
-    	// First Row: 1 2 3 4 5 6    1 2 3 4 5 6
-    	System.out.print("\n" + "   ");
-    	for (int i = 0; i < map.getGridLength(); i++) {
-    		System.out.print(i + "  ");
-    	}
-    	System.out.print("        ");
-    	for (int i = 0; i < map.getGridLength(); i++) {
-    		System.out.print(i + "  ");
-    	}
-    	System.out.print("\n");
-    	
-    	// Display Map
-    	for (int i = 0; i < map.getGridSize(); i++) {
-    		// Display Cols: A B C D E F G
-    		if (i % map.getGridLength() == 0) {
-    			System.out.print("\n");
-    			System.out.print(Map.alphabet.charAt(i / map.getGridLength()) + "  ");
-    		}
-    		// Display cells: - - - - - - -
-    		System.out.print(oppMap.renderDisplayCell(i) + "  ");
-    		System.out.print("      ");
-    		// Display Cols: A B C D E F G
-    		if (i % map.getGridLength() == 0) {
-    			System.out.print("\n");
-    			System.out.print(Map.alphabet.charAt(i / map.getGridLength()) + "  ");
-    		}
-    		// Display cells: - - - - - - -
-    		System.out.print(map.renderDisplayCell(i) + "  ");
-    	}
-    	System.out.print("\n");
-    	
-    	// Map legend
-    	System.out.print("       Opponent Map                   My Map");
-    	System.out.print("\n" + "\n");
-    }
-    
-    private int convertToCellLocation(String userInput) throws InputMismatchException {
+    protected int convertToCellLocation(String userInput) throws InputMismatchException {
     	if (userInput.length() == 2) {
     		char letter = userInput.charAt(0);
     		char digit = userInput.charAt(1);

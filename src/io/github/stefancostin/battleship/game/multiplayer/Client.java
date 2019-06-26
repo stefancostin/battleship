@@ -16,11 +16,34 @@ public class Client extends Player {
 	
 	public void run() {
 		try {
+			// Establishing connection
 			socket = new Socket("localhost", Constants.port);
 			System.out.println("Client started.");
+			
+			// Establishing Input Drivers
+			in = new InputStreamReader(socket.getInputStream());
+			br = new BufferedReader(in);
+						
+			// Establishing Output Drivers
+			ps = new PrintStream(socket.getOutputStream());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	public String read() {
+		String input = null;
+		try {
+			input = br.readLine();
+			System.out.println("client said: " + input);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return input;
+	}
+	
+	public void post(String output) {
+		ps.println(output);
 	}
 	
 	public void close() throws IOException {

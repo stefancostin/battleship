@@ -4,15 +4,15 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import io.github.stefancostin.battleship.game.Battleship;
-import io.github.stefancostin.battleship.utils.GameHelper;
+import io.github.stefancostin.battleship.utils.PlayerHelper;
 
 public abstract class Player {
-	public GameHelper abilities;
+	public PlayerHelper abilities;
 	private ArrayList<Battleship> battleshipList;
 	private int numOfGuesses;
 	
 	public Player() {
-		this.abilities = new GameHelper();
+		this.abilities = new PlayerHelper();
 		this.battleshipList = new ArrayList<>();
 	}
 	

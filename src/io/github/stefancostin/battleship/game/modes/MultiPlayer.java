@@ -7,7 +7,6 @@ import io.github.stefancostin.battleship.game.Battleship;
 import io.github.stefancostin.battleship.game.multiplayer.Client;
 import io.github.stefancostin.battleship.game.multiplayer.Player;
 import io.github.stefancostin.battleship.game.multiplayer.Server;
-import io.github.stefancostin.battleship.utils.GameHelper;
 
 public class MultiPlayer extends GameMode {
 	private Player player;
@@ -38,19 +37,26 @@ public class MultiPlayer extends GameMode {
 		try {
 			player.run();
 	    	do {
-//	    		utils.renderMultiplayerMap();
+	    		player.abilities.renderMultiplayerMap();
 	    		if (player.getClass() == Server.class) {
 	    			System.out.println("Server identified");
 	    			// Server's Turn
 		    		String playerInput = player.abilities.getUserInput("Enter a guess: ");
-		    		this.checkPlayerGuess(playerInput);
-		    		this.getResultFromOpponent();
+		    		this.postPlayerGuess(playerInput);
+		    		this.processResultFromOpponent(playerInput);
 		    		// Client's Turn
 		    		String result = this.checkOpponentInput();
 		    		this.postResultToOpponent(result);
 		    		player.abilities.renderMap();
 	    		} else if (player.getClass() == Client.class) {
 	    			System.out.println("Client identified");
+		    		// Client's Turn
+		    		String result = this.checkOpponentInput();
+		    		this.postResultToOpponent(result);
+	    			// Server's Turn
+		    		String playerInput = player.abilities.getUserInput("Enter a guess: ");
+		    		this.postPlayerGuess(playerInput);
+		    		this.processResultFromOpponent(playerInput);
 	    		}
 	    	} while(!player.getBattleshipList().isEmpty());
 		} catch (IOException e) {
@@ -60,23 +66,23 @@ public class MultiPlayer extends GameMode {
 		}
     }
     
-    public void checkPlayerGuess(String playerInput) {
+    private void postPlayerGuess(String playerInput) {
     	player.incrementNumOfGuesses();
     	player.post(playerInput);
     }
     
-    public String checkOpponentInput() {
+    private String checkOpponentInput() {
     	System.out.println("Waiting for other player...");
     	String opponentInput = player.read();
     	return player.abilities.checkCell(opponentInput, player.getBattleshipList());
     }
     
-    public void getResultFromOpponent() {
+    private void processResultFromOpponent(String playerInput) {
     	String result = player.read();
-    	
+    	this.player.abilities.claimOpponentCell(playerInput, result);
     }
     
-    public void postResultToOpponent(String resultOfHit) {
+    private void postResultToOpponent(String resultOfHit) {
     	player.post(resultOfHit);
     }
     

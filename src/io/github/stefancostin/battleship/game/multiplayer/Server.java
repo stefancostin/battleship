@@ -39,13 +39,13 @@ public class Server extends Player {
 //			e.printStackTrace();
 ////			this.close();
 //		}
-		finally {			
-			try {
-				this.close();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+//		finally {			
+//			try {
+//				this.close();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//		}
 	}
 	
 	public String read() {
