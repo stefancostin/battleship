@@ -26,7 +26,7 @@ public class Server extends Player {
 		try {
 			// Establishing connection
 			serverSocket = new ServerSocket(Constants.PORT);
-			serverSocket.setSoTimeout(15000);
+			serverSocket.setSoTimeout(30000);
 			socket = serverSocket.accept();
 			System.out.println("Client connection established.");
 			
