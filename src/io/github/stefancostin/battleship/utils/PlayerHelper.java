@@ -2,7 +2,6 @@ package io.github.stefancostin.battleship.utils;
 
 import java.util.InputMismatchException;
 
-import io.github.stefancostin.battleship.game.Battleship;
 import io.github.stefancostin.battleship.game.Map;
 
 public class PlayerHelper extends GameHelper {
@@ -18,35 +17,47 @@ public class PlayerHelper extends GameHelper {
     	for (int i = 0; i < map.getGridLength(); i++) {
     		System.out.print(i + "  ");
     	}
-    	System.out.print("        ");
+    	System.out.print("           ");
     	for (int i = 0; i < map.getGridLength(); i++) {
     		System.out.print(i + "  ");
     	}
     	System.out.print("\n");
     	
     	// Display Map
-    	for (int i = 0; i < map.getGridSize(); i++) {
-    		// Display Cols: A B C D E F G
-    		if (i % map.getGridLength() == 0) {
-    			System.out.print("\n");
-    			System.out.print(Map.alphabet.charAt(i / map.getGridLength()) + "  ");
+    	for (int row = 0; row < map.getGridLength(); row++) {   
+    		
+    		for (int i = 0; i < map.getGridLength(); i++) {
+    			int playerCell = row * map.getGridLength() + i;
+    			
+    			// Display Cols: A B C D E F G
+    			if (i % map.getGridLength() == 0) {
+    				System.out.print("\n");
+
+    				// Opponent Row   					
+    				for (int j = 0; j < oppMap.getGridLength(); j++) {
+    					int oppCell = row * oppMap.getGridLength() + j;
+
+    					// Opponent Cols: A B C D E F G
+    		    		if (j % map.getGridLength() == 0) {
+    		    			System.out.print(Map.alphabet.charAt(row) + "  ");
+    		    		}
+    					// Display cells: - - - - - - -
+    					System.out.print(oppMap.renderDisplayCell(oppCell) + "  ");
+    				}
+    				
+    				// Player Cols: A B C D E F G
+    				System.out.print("        ");
+    				System.out.print(Map.alphabet.charAt(row) + "  ");
+    			}
+    			// Display cells: - - - - - - -
+    			System.out.print(map.renderDisplayCell(playerCell) + "  ");
     		}
-    		// Display cells: - - - - - - -
-    		System.out.print(oppMap.renderDisplayCell(i) + "  ");
-    		System.out.print("      ");
-    		// Display Cols: A B C D E F G
-    		if (i % map.getGridLength() == 0) {
-    			System.out.print("\n");
-    			System.out.print(Map.alphabet.charAt(i / map.getGridLength()) + "  ");
-    		}
-    		// Display cells: - - - - - - -
-    		System.out.print(map.renderDisplayCell(i) + "  ");
     	}
-    	System.out.print("\n");
     	
     	// Map legend
-    	System.out.print("       Opponent Map                   My Map");
     	System.out.print("\n" + "\n");
+    	System.out.print("      Opponent Map                       My Map");
+    	System.out.print("\n" + "\n" + "\n");
     }
     
     public void claimOpponentCell(String playerInput, String result) {

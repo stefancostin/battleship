@@ -31,6 +31,8 @@ public class MultiPlayer extends GameMode {
     		ArrayList<Integer> newLocation = utils.placeBattleship(3);
     		battleship.setLocationCells(newLocation);
     	}
+    	
+    	player.abilities.renderMultiplayerMap();
     }
     
     public void startPlaying() {
@@ -47,7 +49,6 @@ public class MultiPlayer extends GameMode {
 		    		// Client's Turn
 		    		String result = this.checkOpponentInput();
 		    		this.postResultToOpponent(result);
-		    		player.abilities.renderMap();
 	    		} else if (player.getClass() == Client.class) {
 	    			System.out.println("Client identified");
 		    		// Client's Turn
