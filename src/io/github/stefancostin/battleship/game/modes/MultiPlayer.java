@@ -42,7 +42,6 @@ public class MultiPlayer extends GameMode {
 	    	do {
 	    		player.abilities.renderMultiplayerMap();
 	    		if (player.getClass() == Server.class) {
-	    			System.out.println("Server identified");
 	    			// Server's Turn
 		    		String playerInput = player.abilities.getUserInput("Enter a guess: ");
 		    		this.postPlayerGuess(playerInput);
@@ -52,7 +51,6 @@ public class MultiPlayer extends GameMode {
 		    		String result = this.checkOpponentInput();
 		    		this.postResultToOpponent(result);
 	    		} else if (player.getClass() == Client.class) {
-	    			System.out.println("Client identified");
 		    		// Client's Turn
 		    		String result = this.checkOpponentInput();
 		    		this.postResultToOpponent(result);
@@ -81,7 +79,7 @@ public class MultiPlayer extends GameMode {
     private String checkOpponentInput() throws IOException {
     	System.out.println("Waiting for other player...");
     	String opponentInput = player.read();
-    	System.out.print("\nOpponent striked at: " + opponentInput);
+    	System.out.println("\nOpponent striked at: " + opponentInput);
     	return player.abilities.checkCell(opponentInput, player.getBattleshipList());
     }
     

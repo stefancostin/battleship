@@ -71,12 +71,11 @@ public class Client extends Player {
     private String getAddress() {
     	String ipAddress = null;
     	Menu menu = new Menu();
-    	menu.displayConnectionOptions();
-    	
-    	String selectedConnectionType = abilities.getUserInput("   What is the game's multiplayer connection?").toUpperCase();	
-    	
-    	ConnectionOption conn = menu.checkConnectionType(selectedConnectionType);
     	do {
+    	menu.displayConnectionOptions();
+    	String selectedConnectionType = abilities.getUserInput("   What is the game's multiplayer connection?").toUpperCase();	
+    	ConnectionOption conn = menu.checkConnectionType(selectedConnectionType);
+    	if (conn == null) continue;
         	switch (conn) {
 	    		case LOCALHOST: ipAddress = Constants.LOCALHOST;
 	    						break;
