@@ -1,5 +1,6 @@
 package io.github.stefancostin.battleship.game;
 
+import io.github.stefancostin.battleship.utils.ConnectionOption;
 import io.github.stefancostin.battleship.utils.MenuOption;
 import io.github.stefancostin.battleship.utils.MultiplayerOption;
 
@@ -14,6 +15,13 @@ public class Menu {
 	
 	public void displayMultiplayerOptions() {
 		for (MultiplayerOption option : MultiplayerOption.values()) {
+			System.out.println("   " + option.getInitial() + ") " + option.getCommand());
+		}
+		System.out.print("\n");
+	}
+	
+	public void displayConnectionOptions() {
+		for (ConnectionOption option : ConnectionOption.values()) {
 			System.out.println("   " + option.getInitial() + ") " + option.getCommand());
 		}
 		System.out.print("\n");
@@ -39,6 +47,17 @@ public class Menu {
 			return MultiplayerOption.SERVER;
 		} else {
 			System.out.println("Invalid multiplayer option.\n");
+		}
+		return null;
+	}
+	
+	public ConnectionOption checkConnectionType(String selectedConnectionType) {
+		if (selectedConnectionType.equals(ConnectionOption.LOCALHOST.getInitial()) || selectedConnectionType.equals(ConnectionOption.LOCALHOST.getCommand())) {
+			return ConnectionOption.LOCALHOST;
+		} else if (selectedConnectionType.equals(ConnectionOption.INTERNET.getInitial()) || selectedConnectionType.equals(ConnectionOption.INTERNET.getCommand())) {
+			return ConnectionOption.INTERNET;
+		} else {
+			System.out.println("Invalid connection option.\n");
 		}
 		return null;
 	}

@@ -4,10 +4,14 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
+import java.net.InetAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketTimeoutException;
+import java.net.URL;
+import java.net.UnknownHostException;
 
+import io.github.stefancostin.battleship.utils.ClosedConnectionException;
 import io.github.stefancostin.battleship.utils.Constants;
 
 public class Server extends Player {
@@ -21,7 +25,7 @@ public class Server extends Player {
 		System.out.println("Server waiting for client...");
 		try {
 			// Establishing connection
-			serverSocket = new ServerSocket(Constants.port);
+			serverSocket = new ServerSocket(Constants.PORT);
 			serverSocket.setSoTimeout(15000);
 			socket = serverSocket.accept();
 			System.out.println("Client connection established.");
@@ -35,31 +39,19 @@ public class Server extends Player {
 		} catch (SocketTimeoutException e) {
 			System.out.println("Client connection timout. Connection has ended to prevent port from being used.");
 		} 
-//		catch (IOException e ) {
-//			e.printStackTrace();
-////			this.close();
-//		}
-//		finally {			
-//			try {
-//				this.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//		}
 	}
 	
-	public String read() {
-		String input = null;
-		try {
-			input = br.readLine();
-			System.out.println("client said: " + input);
-		} catch (IOException e) {
-			e.printStackTrace();
+	public String read() throws IOException {
+		String input = "";
+		input = br.readLine();
+		if (input == null) {
+			throw new ClosedConnectionException("Server has closed the connection.");
 		}
 		return input;
 	}
 	
 	public void post(String output) {
+		output = output == null ? "" : output;
 		ps.println(output);
 	}
 	
@@ -75,26 +67,7 @@ public class Server extends Player {
 			} finally {
 				serverSocket.close();
 			}
-		}
-		
-//		ps.close();
-//		try {
-//			br.close();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		} finally {
-//			try {
-//				in.close();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			} finally {
-//				try {
-//					serverSocket.close();
-//				} catch (IOException e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		}		
+		}	
 	}
 	
 	@Override

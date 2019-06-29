@@ -1,5 +1,6 @@
 package io.github.stefancostin.battleship.utils;
 
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 import io.github.stefancostin.battleship.game.Map;
@@ -74,6 +75,12 @@ public class PlayerHelper extends GameHelper {
     	} finally {    		
     		System.out.println(result.toString().toLowerCase());
     	}  	
+    }
+    
+    public void markBattleshipOnMap(ArrayList<Integer> locationCells) {
+    	for (int location : locationCells) {    		
+    		map.setDisplayCell(location, 'b');
+    	}
     }
     
 }

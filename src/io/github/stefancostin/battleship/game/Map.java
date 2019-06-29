@@ -42,6 +42,10 @@ public class Map {
 		this.grid = grid;
 	}
 	
+	public void setUsedGridLocation(int location) {
+		this.grid[location] = 1; 
+	}
+	
 	public int getShipCount() {
 		return shipCount;
 	}

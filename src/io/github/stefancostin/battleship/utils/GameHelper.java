@@ -37,7 +37,6 @@ public class GameHelper {
     	int gridLength = map.getGridLength();
     	int gridSize = map.getGridSize();
     	
-    	String temp = null;
     	int[] coords = new int[shipSize];
     	boolean success = false;
     	int attempts = 0;
@@ -73,6 +72,7 @@ public class GameHelper {
     	}
     	int x = 0;
     	while (x < shipSize) {
+    		map.setUsedGridLocation(coords[x]);
     		alphaCells.add(coords[x]);
     		x++;
 //    		System.out.println(" coord: " + coords[x -1]);
@@ -127,7 +127,7 @@ public class GameHelper {
     }
     
     protected int convertToCellLocation(String userInput) throws InputMismatchException {
-    	if (userInput.length() == 2) {
+    	if (userInput != null && userInput.length() == 2) {
     		char letter = userInput.charAt(0);
     		char digit = userInput.charAt(1);
     		

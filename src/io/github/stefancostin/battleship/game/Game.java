@@ -1,18 +1,13 @@
 package io.github.stefancostin.battleship.game;
 
-import java.util.ArrayList;
-
 import io.github.stefancostin.battleship.game.modes.GameMode;
 import io.github.stefancostin.battleship.game.modes.MultiPlayer;
 import io.github.stefancostin.battleship.game.modes.SinglePlayer;
 import io.github.stefancostin.battleship.game.multiplayer.Client;
-import io.github.stefancostin.battleship.game.multiplayer.Player;
 import io.github.stefancostin.battleship.game.multiplayer.Server;
-import io.github.stefancostin.battleship.tests.BattleshipTestDrive;
 import io.github.stefancostin.battleship.utils.GameHelper;
 import io.github.stefancostin.battleship.utils.MenuOption;
 import io.github.stefancostin.battleship.utils.MultiplayerOption;
-import io.github.stefancostin.battleship.utils.Turn;
 
 public class Game {
 	private GameHelper utils;
@@ -53,7 +48,7 @@ public class Game {
     			default: 			System.out.print("Please enter a valid option.\n");
     		}  		
     		pass++;
-    	} while(pass < maxPasses);
+    	} while (pass < maxPasses);
     }
     
     private void singlePlayerGame() {
@@ -82,23 +77,8 @@ public class Game {
     						
     		default:		System.out.print("Please enter a valid multiplayer role.\n");
     	}
-    	
-    	
-//    	GameMode newGame = new MultiPlayer();
-//    	newGame.setupGame();
-//    	newGame.startPlaying();
-    	
+
     	return 0;
     }
-    
-//    private void startGame(Class gameModeClass) {
-//		try {
-//			GameMode newGame = (GameMode) gameModeClass.newInstance();
-//			newGame.setupGame();
-//			newGame.startPlaying();
-//		} catch (InstantiationException | IllegalAccessException e) {
-//			e.printStackTrace();
-//		}
-//    }
     
 }

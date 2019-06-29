@@ -10,6 +10,8 @@ public abstract class Player {
 	public PlayerHelper abilities;
 	private ArrayList<Battleship> battleshipList;
 	private int numOfGuesses;
+	private int kills;
+	private boolean isWinner;
 	
 	public Player() {
 		this.abilities = new PlayerHelper();
@@ -32,8 +34,23 @@ public abstract class Player {
 		this.numOfGuesses++;
 	}
 	
+	public int getKills() {
+		return this.kills;
+	}
+	
+	public void addKill() {
+		this.kills++;
+		if (this.kills == 3) {
+			this.isWinner = true;
+		}
+	}
+	
+	public boolean isWinner() {
+		return this.isWinner;
+	}
+ 	
 	public abstract void run() throws IOException;
 	public abstract void close() throws IOException;
-	public abstract String read();
+	public abstract String read() throws IOException;;
 	public abstract void post(String output);
 }
