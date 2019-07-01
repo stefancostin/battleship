@@ -80,7 +80,7 @@ public class Client extends Player {
 	    		case LOCALHOST: ipAddress = Constants.LOCALHOST;
 	    						break;
 	    						
-	    		case INTERNET:	ipAddress = this.setPublicIp();
+	    		case INTERNET:	ipAddress = this.setAddress();
 	    						break;
 	    						
 	    		default:		System.out.print("Please enter a valid connection type.\n");
@@ -89,8 +89,8 @@ public class Client extends Player {
     	return ipAddress;
     }
    
-    private String setPublicIp() {
-		return abilities.getUserInput("  Enter public IP: ").trim();
+    private String setAddress() {
+		return abilities.getUserInput("  Enter IP address: ").trim();
     }
 	
 	@Override
